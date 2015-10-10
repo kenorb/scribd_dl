@@ -1,0 +1,10 @@
+# Parsing page for wkhtmltopdf
+ex -V1 page.html <<-EOF
+  " Correcting missing protocol, see: https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2359
+  %s,'//,'http://,ge 
+  %s,"//,"http://,ge 
+  " Correcting relative paths, see: https://github.com/wkhtmltopdf/wkhtmltopdf/issues/2359
+  %s,'/,'http://www.scribd.com/,ge
+  %s,"/,"http://www.scribd.com/,ge
+  wq " Update changes and quit.
+EOF
